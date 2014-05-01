@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/Person"
+	xmlns:local="http://www.example.org/Person" elementFormDefault="qualified">
+	<xsd:element name="person" type="local:Person" />
+	<xsd:complexType name="Person">
+		<xsd:sequence>
+			<xsd:element name="firstname" type="xsd:string" />
+			<xsd:element name="lastname" type="xsd:string" />
+			<xsd:element name="address" type="local:Address" />
+			<xsd:element name="birthdate" type="xsd:date" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Address">
+		<xsd:sequence>
+			<xsd:element name="street" type="xsd:string" />
+			<xsd:element name="zip" type="xsd:string" />
+			<xsd:element name="city" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

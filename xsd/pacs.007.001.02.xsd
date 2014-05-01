@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--November 2012-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="urn:iso:std:iso:20022:tech:xsd:sdd:pacs.007.001.02"
+    targetNamespace="urn:iso:std:iso:20022:tech:xsd:sdd:pacs.007.001.02"
+    elementFormDefault="qualified">
+  <xs:element name="Document" type="Document"/>
+  <xs:simpleType name="BICIdentifier">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="CategoryPurpose1Choice">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="Cd" type="ExternalCategoryPurpose1Code"/>
+        <xs:element name="Prtry" type="Max35Text"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="CountryCode">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z]{2,2}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DateAndPlaceOfBirth">
+    <xs:sequence>
+      <xs:element name="BirthDt" type="ISODate"/>
+      <xs:element name="PrvcOfBirth" type="Max35Text" minOccurs="0"/>
+      <xs:element name="CityOfBirth" type="Max35Text"/>
+      <xs:element name="CtryOfBirth" type="CountryCode"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Document">
+    <xs:sequence>
+      <xs:element name="FIToFIPmtRvsl" type="FIToFIPaymentReversalV02"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ExternalCategoryPurpose1Code">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="4"/>
+      <xs:pattern value="\S+.*"/>
+      <xs:whiteSpace value="collapse"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ExternalLocalInstrument1Code">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="B2B"/>
+      <xs:enumeration value="COR1"/>
+      <xs:enumeration value="CORE"/>
+      <xs:minLength value="1"/>
+      <xs:maxLength value="35"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="FinancialIdentificationSchemeName2">
+    <xs:sequence>
+      <xs:element name="Prtry" type="SCLSDDId9"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FIToFIPaymentReversalV02">
+    <xs:sequence>
+      <xs:element name="GrpHdr" type="SCLSDDGroupHeader9"/>
+      <xs:element name="OrgnlGrpInf" type="SCLSDDOriginalGroupInformation5"/>
+      <xs:element name="TxInf" type="SCLSDDPaymentTransactionInformation5" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="IBANIdentifier">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-zA-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ISODate">
+    <xs:restriction base="xs:date">
+      <xs:pattern value="[0-9]{4,4}\-[0-9]{2,2}\-[0-9]{2,2}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ISODateTime">
+    <xs:restriction base="xs:dateTime">
+      <xs:pattern value="[0-9]{4,4}\-[0-9]{2,2}\-[0-9]{2,2}[T][0-9]{2,2}:[0-9]{2,2}:[0-9]{2,2}[\S]*"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Max1025Text">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="1025"/>
+      <xs:pattern value="\S+.*"/>
+      <xs:whiteSpace value="collapse"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Max140Text">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="140"/>
+      <xs:pattern value="\S+.*"/>
+      <xs:whiteSpace value="collapse"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Max15NumericText">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{1,15}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Max35Text">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="35"/>
+      <xs:pattern value="\S+.*"/>
+      <xs:whiteSpace value="collapse"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Max35Text_Prtry">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SCL"/>
+      <xs:minLength value="1"/>
+      <xs:maxLength value="35"/>
+      <xs:pattern value="\S+.*"/>
+      <xs:whiteSpace value="collapse"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Max35Text_SMNDA">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SMNDA"/>
+      <xs:minLength value="1"/>
+      <xs:maxLength value="35"/>
+      <xs:pattern value="\S+.*"/>
+      <xs:whiteSpace value="collapse"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Max70Text">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="70"/>
+      <xs:pattern value="\S+.*"/>
+      <xs:whiteSpace value="collapse"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="SCLSDDAccountIdentification3Choice">
+    <xs:sequence>
+      <xs:element name="IBAN" type="IBANIdentifier"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDAmendmentInformationDetails1">
+    <xs:sequence>
+      <xs:element name="OrgnlMndtId" type="SCLSDDId8" minOccurs="0"/>
+      <xs:element name="OrgnlCdtrSchmeId" type="SCLSDDCdtrSchmeId1" minOccurs="0"/>
+      <xs:element name="OrgnlDbtrAcct" type="SCLSDDCashAccount7" minOccurs="0"/>
+      <xs:element name="OrgnlDbtrAgt" type="SCLSDDOrgnlDbtrAgt" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="SCLSDDAnyBICIdentifier">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="SCLSDDBranchAndFinancialInstitutionIdentification3">
+    <xs:sequence>
+      <xs:element name="FinInstnId" type="SCLSDDFinancialInstitutionIdentification5Choice"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDCashAccount7">
+    <xs:sequence>
+      <xs:element name="Id" type="SCLSDDAccountIdentification3Choice"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDCdtrSchmeId">
+    <xs:sequence>
+      <xs:element name="Id" type="SCLSDDPrivateIdentification2"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDCdtrSchmeId1">
+    <xs:sequence>
+      <xs:element name="Nm" type="Max70Text" minOccurs="0"/>
+      <xs:element name="Id" type="SCLSDDPrivateIdentification" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="SCLSDDChargeBearerType1Code">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SLEV"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="SCLSDDChargesInformation1">
+    <xs:sequence>
+      <xs:element name="Amt" type="SCLSDDCurrencyAndAmount"/>
+      <xs:element name="Pty" type="SCLSDDBranchAndFinancialInstitutionIdentification3"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDClearingSystemIdentification1Choice">
+    <xs:sequence>
+      <xs:element name="Prtry" type="Max35Text_Prtry"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDCreditorReferenceInformation2">
+    <xs:sequence>
+      <xs:element name="Tp" type="SCLSDDCreditorReferenceType2"/>
+      <xs:element name="Ref" type="Max35Text"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDCreditorReferenceType1Choice">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="Cd" type="SCLSDDDocumentType3Code"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDCreditorReferenceType2">
+    <xs:sequence>
+      <xs:element name="CdOrPrtry" type="SCLSDDCreditorReferenceType1Choice"/>
+      <xs:element name="Issr" type="Max35Text" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDCurrencyAndAmount">
+    <xs:simpleContent>
+      <xs:extension base="SCLSDDCurrencyAndAmount_SimpleType">
+        <xs:attribute name="Ccy" type="SCLSDDCurrencyCode" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDCurrencyAndAmount1">
+    <xs:simpleContent>
+      <xs:extension base="SCLSDDCurrencyAndAmount_SimpleType">
+        <xs:attribute name="Ccy" type="SCLSDDCurrencyCode" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="SCLSDDCurrencyAndAmount_SimpleType">
+    <xs:restriction base="xs:decimal">
+      <xs:pattern value="[0-9]{0,15}([\.]([0-9]{0,2})){0,1}"/>
+      <xs:minInclusive value="0"/>
+      <xs:totalDigits value="18"/>
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SCLSDDCurrencyAndAmount_SimpleType_Total">
+    <xs:restriction base="xs:decimal">
+      <xs:pattern value="[0-9]{0,15}([\.]([0-9]{0,2})){0,1}"/>
+      <xs:maxInclusive value="999999999999999.99"/>
+      <xs:minInclusive value="0.01"/>
+      <xs:totalDigits value="18"/>
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SCLSDDCurrencyAndAmount_SimpleType_Tx">
+    <xs:restriction base="xs:decimal">
+      <xs:pattern value="[0-9]{0,15}([\.]([0-9]{0,2})){0,1}"/>
+      <xs:maxInclusive value="999999999.99"/>
+      <xs:minInclusive value="0.01"/>
+      <xs:totalDigits value="18"/>
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="SCLSDDCurrencyAndAmount_Total">
+    <xs:simpleContent>
+      <xs:extension base="SCLSDDCurrencyAndAmount_SimpleType_Total">
+        <xs:attribute name="Ccy" type="SCLSDDCurrencyCode" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDCurrencyAndAmount_Tx">
+    <xs:simpleContent>
+      <xs:extension base="SCLSDDCurrencyAndAmount_SimpleType_Tx">
+        <xs:attribute name="Ccy" type="SCLSDDCurrencyCode" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="SCLSDDCurrencyCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EUR"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SCLSDDDocumentType3Code">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SCOR"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SCLSDDExternalOrganisationIdentification1Code">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="4"/>
+      <xs:pattern value="\S+.*"/>
+      <xs:whiteSpace value="collapse"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SCLSDDExternalPersonIdentification1Code">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="4"/>
+      <xs:pattern value="\S+.*"/>
+      <xs:whiteSpace value="collapse"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="SCLSDDFinancialInstitutionIdentification5Choice">
+    <xs:sequence>
+      <xs:element name="BIC" type="BICIdentifier"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDGenericOrganisationIdentification1">
+    <xs:sequence>
+      <xs:element name="Id" type="Max35Text"/>
+      <xs:element name="SchmeNm" type="SCLSDDOrganisationIdentificationSchemeName1Choice" minOccurs="0"/>
+      <xs:element name="Issr" type="Max35Text" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDGenericPersonIdentification1">
+    <xs:sequence>
+      <xs:element name="Id" type="Max35Text"/>
+      <xs:element name="SchmeNm" type="SCLSDDPersonIdentificationSchemeName1Choice" minOccurs="0"/>
+      <xs:element name="Issr" type="Max35Text" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDGroupHeader9">
+    <xs:sequence>
+      <xs:element name="MsgId" type="SCLSDDId7"/>
+      <xs:element name="CreDtTm" type="ISODateTime"/>
+      <xs:element name="NbOfTxs" type="Max15NumericText"/>
+      <xs:element name="GrpRvsl">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="false"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="TtlRvsdIntrBkSttlmAmt" type="SCLSDDCurrencyAndAmount_Total"/>
+      <xs:element name="IntrBkSttlmDt" type="ISODate"/>
+      <xs:element name="SttlmInf" type="SCLSDDSettlementInformation1"/>
+      <xs:element name="InstgAgt" type="SCLSDDBranchAndFinancialInstitutionIdentification3" minOccurs="0"/>
+      <xs:element name="InstdAgt" type="SCLSDDBranchAndFinancialInstitutionIdentification3" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDId10">
+    <xs:sequence>
+      <xs:element name="Id" type="SCLSDDId8"/>
+      <xs:element name="SchmeNm" type="FinancialIdentificationSchemeName2"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDId2">
+    <xs:sequence>
+      <xs:element name="Nm" type="Max70Text"/>
+      <xs:element name="PstlAdr" type="SCLSDDPostalAddress1" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDId4">
+    <xs:sequence>
+      <xs:element name="Id" type="SCLSDDId8"/>
+      <xs:element name="SchmeNm" type="FinancialIdentificationSchemeName2"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDId5">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="Nm" type="Max70Text"/>
+        <xs:element name="Id" type="SCLSDDParty3Choice"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="SCLSDDId7">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([A-Za-z0-9]|[+|\?|/|\-|:|\(|\)|\.|,|&apos;]){1,35}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SCLSDDId8">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([A-Za-z0-9]|[+|\?|/|\-|:|\(|\)|\.|,|&apos;|\s]){1,35}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SCLSDDId9">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SEPA"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="SCLSDDLocalInstrument1Choice">
+    <xs:sequence>
+      <xs:element name="Cd" type="ExternalLocalInstrument1Code"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDMandateRelatedInformation1">
+    <xs:sequence>
+      <xs:element name="MndtId" type="SCLSDDId8"/>
+      <xs:element name="DtOfSgntr" type="ISODate"/>
+      <xs:element name="AmdmntInd" type="TrueFalseIndicator" minOccurs="0"/>
+      <xs:element name="AmdmntInfDtls" type="SCLSDDAmendmentInformationDetails1" minOccurs="0"/>
+      <xs:element name="ElctrncSgntr" type="Max1025Text" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDOrganisationIdentification2">
+    <xs:sequence>
+      <xs:element name="BICOrBEI" type="BICIdentifier"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDOrganisationIdentification4">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="BICOrBEI" type="SCLSDDAnyBICIdentifier"/>
+        <xs:element name="Othr" type="SCLSDDGenericOrganisationIdentification1"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDOrganisationIdentificationSchemeName1Choice">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="Cd" type="SCLSDDExternalOrganisationIdentification1Code"/>
+        <xs:element name="Prtry" type="Max35Text"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDOrgnlDbtrAgt">
+    <xs:sequence>
+      <xs:element name="FinInstnId" type="SCLSDDOrgnlDbtrAgt1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDOrgnlDbtrAgt1">
+    <xs:sequence>
+      <xs:element name="Othr" type="SCLSDDOrgnlDbtrAgtOther2"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDOrgnlDbtrAgtOther2">
+    <xs:sequence>
+      <xs:element name="Id" type="Max35Text_SMNDA"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="SCLSDDOrgnlMsgNmId">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="pacs\.003[A-Za-z0-9\.]{0,27}"/>
+      <xs:pattern value="PACS\.003[A-Za-z0-9\.]{0,27}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="SCLSDDOriginalGroupInformation5">
+    <xs:sequence>
+      <xs:element name="OrgnlMsgId" type="SCLSDDId7"/>
+      <xs:element name="OrgnlMsgNmId" type="SCLSDDOrgnlMsgNmId"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDOriginalTransactionReference1">
+    <xs:sequence>
+      <xs:element name="IntrBkSttlmDt" type="ISODate"/>
+      <xs:element name="ReqdColltnDt" type="ISODate"/>
+      <xs:element name="CdtrSchmeId" type="SCLSDDCdtrSchmeId"/>
+      <xs:element name="SttlmInf" type="SCLSDDSettlementInformation3" minOccurs="0"/>
+      <xs:element name="PmtTpInf" type="SCLSDDPaymentTypeInformation6"/>
+      <xs:element name="MndtRltdInf" type="SCLSDDMandateRelatedInformation1"/>
+      <xs:element name="RmtInf" type="SCLSDDRemittanceInformation1" minOccurs="0"/>
+      <xs:element name="UltmtDbtr" type="SCLSDDPartyIdentification10" minOccurs="0"/>
+      <xs:element name="Dbtr" type="SCLSDDPartyIdentification9"/>
+      <xs:element name="DbtrAcct" type="SCLSDDCashAccount7"/>
+      <xs:element name="DbtrAgt" type="SCLSDDBranchAndFinancialInstitutionIdentification3"/>
+      <xs:element name="CdtrAgt" type="SCLSDDBranchAndFinancialInstitutionIdentification3"/>
+      <xs:element name="Cdtr" type="SCLSDDId2"/>
+      <xs:element name="CdtrAcct" type="SCLSDDCashAccount7"/>
+      <xs:element name="UltmtCdtr" type="SCLSDDPartyIdentification10" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDParty3Choice">
+    <xs:sequence>
+      <xs:element name="OrgId" type="SCLSDDOrganisationIdentification2"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDParty4Choice">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="OrgId" type="SCLSDDOrganisationIdentification4"/>
+        <xs:element name="PrvtId" type="SCLSDDPersonIdentification5"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDPartyIdentification10">
+    <xs:sequence>
+      <xs:element name="Nm" type="Max70Text" minOccurs="0"/>
+      <xs:element name="Id" type="SCLSDDParty4Choice" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDPartyIdentification9">
+    <xs:sequence>
+      <xs:element name="Nm" type="Max70Text"/>
+      <xs:element name="PstlAdr" type="SCLSDDPostalAddress1" minOccurs="0"/>
+      <xs:element name="Id" type="SCLSDDParty4Choice" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDPaymentTransactionInformation5">
+    <xs:sequence>
+      <xs:element name="RvslId" type="SCLSDDId7"/>
+      <xs:element name="OrgnlInstrId" type="SCLSDDId7" minOccurs="0"/>
+      <xs:element name="OrgnlEndToEndId" type="Max35Text"/>
+      <xs:element name="OrgnlTxId" type="SCLSDDId7"/>
+      <xs:element name="OrgnlIntrBkSttlmAmt" type="SCLSDDCurrencyAndAmount_Tx"/>
+      <xs:element name="RvsdIntrBkSttlmAmt" type="SCLSDDCurrencyAndAmount_Tx"/>
+      <xs:element name="RvsdInstdAmt" type="SCLSDDCurrencyAndAmount1" minOccurs="0"/>
+      <xs:element name="ChrgBr" type="SCLSDDChargeBearerType1Code" minOccurs="0"/>
+      <xs:element name="ChrgsInf" type="SCLSDDChargesInformation1" minOccurs="0"/>
+      <xs:element name="InstgAgt" type="SCLSDDBranchAndFinancialInstitutionIdentification3" minOccurs="0"/>
+      <xs:element name="RvslRsnInf" type="SCLSDDReversalReasonInformation1"/>
+      <xs:element name="OrgnlTxRef" type="SCLSDDOriginalTransactionReference1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDPaymentTypeInformation6">
+    <xs:sequence>
+      <xs:element name="SvcLvl" type="SCLSDDServiceLevel2Choice"/>
+      <xs:element name="LclInstrm" type="SCLSDDLocalInstrument1Choice"/>
+      <xs:element name="SeqTp" type="SCLSDDSequenceType1Code"/>
+      <xs:element name="CtgyPurp" type="CategoryPurpose1Choice" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDPersonIdentification5">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="DtAndPlcOfBirth" type="DateAndPlaceOfBirth"/>
+        <xs:element name="Othr" type="SCLSDDGenericPersonIdentification1"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDPersonIdentificationSchemeName1Choice">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="Cd" type="SCLSDDExternalPersonIdentification1Code"/>
+        <xs:element name="Prtry" type="Max35Text"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDPostalAddress1">
+    <xs:sequence>
+      <xs:element name="Ctry" type="CountryCode" minOccurs="0"/>
+      <xs:element name="AdrLine" type="Max70Text" minOccurs="0" maxOccurs="2"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDPrivateIdentification">
+    <xs:sequence>
+      <xs:element name="PrvtId" type="SCLSDDPrty1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDPrivateIdentification2">
+    <xs:sequence>
+      <xs:element name="PrvtId" type="SCLSDDPrty2"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDPrty1">
+    <xs:sequence>
+      <xs:element name="Othr" type="SCLSDDId4"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDPrty2">
+    <xs:sequence>
+      <xs:element name="Othr" type="SCLSDDId10"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDRemittanceInformation1">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="Ustrd" type="Max140Text"/>
+        <xs:element name="Strd" type="SCLSDDStructuredRemittanceInformation6"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDReversalReason1Choice">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="Cd" type="SCLSDDTransactionReversalReason2Code"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDReversalReasonInformation1">
+    <xs:sequence>
+      <xs:element name="Orgtr" type="SCLSDDId5"/>
+      <xs:element name="Rsn" type="SCLSDDReversalReason1Choice"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="SCLSDDSequenceType1Code">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FNAL"/>
+      <xs:enumeration value="FRST"/>
+      <xs:enumeration value="OOFF"/>
+      <xs:enumeration value="RCUR"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SCLSDDServiceLevel1Code">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SEPA"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="SCLSDDServiceLevel2Choice">
+    <xs:sequence>
+      <xs:element name="Cd" type="SCLSDDServiceLevel1Code"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDSettlementInformation1">
+    <xs:sequence>
+      <xs:element name="SttlmMtd" type="SCLSDDSettlementMethod1Code"/>
+      <xs:element name="ClrSys" type="SCLSDDClearingSystemIdentification1Choice"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SCLSDDSettlementInformation3">
+    <xs:sequence>
+      <xs:element name="SttlmMtd" type="SCLSDDSettlementMethod1Code"/>
+      <xs:element name="ClrSys" type="SCLSDDClearingSystemIdentification1Choice" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="SCLSDDSettlementMethod1Code">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CLRG"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="SCLSDDStructuredRemittanceInformation6">
+    <xs:sequence>
+      <xs:element name="CdtrRefInf" type="SCLSDDCreditorReferenceInformation2" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="SCLSDDTransactionReversalReason2Code">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AM05"/>
+      <xs:enumeration value="MS02"/>
+      <xs:enumeration value="MS03"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TrueFalseIndicator">
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+</xs:schema>
