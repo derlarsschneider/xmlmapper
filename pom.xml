@@ -114,9 +114,19 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-tools</artifactId>
 			<version>LATEST</version>
-<!-- 			<version>4.3.1.CR1</version> -->
+			<!-- <version>4.3.1.CR1</version> -->
 		</dependency>
 
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>LATEST</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+			<version>LATEST</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -148,6 +158,43 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>hibernate3-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<components>
+						<component>
+							<name>hbm2java</name>
+							<outputDirectory>/src/main/generated</outputDirectory>
+							<!-- <implementation>configuration</implementation> -->
+							<implementation>jdbcconfiguration</implementation>
+						</component>
+					</components>
+					<componentProperties>
+						<revengfile>databases/hibernate.reveng.xml</revengfile>
+						<!-- <propertyfile>/src/main/resources/config/hibernate.properties</propertyfile> -->
+ 						<configurationfile>/databases/hibernate.cfg.xml</configurationfile>
+ 						<jdk5>false</jdk5>
+						<ejb3>false</ejb3>
+						<packagename>de.consutor.xmlmapper.hibernate</packagename>
+						<format>true</format>
+						<haltonerror>true</haltonerror>
+					</componentProperties>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.hsqldb</groupId>
+						<artifactId>hsqldb</artifactId>
+						<version>LATEST</version>
+					</dependency>
+					<dependency>
+						<groupId>cglib</groupId>
+						<artifactId>cglib-nodep</artifactId>
+						<version>LATEST</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
